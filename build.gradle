@@ -6,12 +6,13 @@ targetCompatibility = 1.6
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 ext {
 	concordionVersion = "1.4.4"
 	concordionExtensionsVersion = "1.1.1"
-	concordionStoryboardVersion = "[0.1.0,)"
+	concordionStoryboardVersion = "+"
 	
 	seleniumVersion				= "2.39.0"
 	slf4jVersion                = "1.7.7"
@@ -20,7 +21,7 @@ ext {
 dependencies {
 	testCompile "org.concordion:concordion:$concordionVersion"
 	testCompile "org.concordion:concordion-extensions:$concordionExtensionsVersion"
-	testCompile "org.concordion:concordion-logback-extension:$concordionStoryboardVersion"
+	testCompile "org.concordion:concordion-storyboard-extension:$concordionStoryboardVersion"
 	
 	testCompile "org.slf4j:slf4j-api:$slf4jVersion"
 	testCompile 'ch.qos.logback:logback-classic:1.1.2'
