@@ -1,26 +1,24 @@
 apply plugin: 'java'
-apply plugin: 'eclipse'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
 repositories {
 	mavenCentral()
-	mavenLocal()
 }
 
 ext {
 	concordionVersion = "1.4.4"
-	concordionExtensionsVersion = "1.1.1"
+	concordionScreenshotExtensionVersion = "1.1.2"
 	concordionStoryboardVersion = "+"
 	
-	seleniumVersion				= "2.39.0"
+	seleniumVersion	= "+"
 	slf4jVersion                = "1.7.7"
 }
 
 dependencies {
 	testCompile "org.concordion:concordion:$concordionVersion"
-	testCompile "org.concordion:concordion-extensions:$concordionExtensionsVersion"
+	testCompile "org.concordion:concordion-screenshot-extension:$concordionScreenshotExtensionVersion"
 	testCompile "org.concordion:concordion-storyboard-extension:$concordionStoryboardVersion"
 	
 	testCompile "org.slf4j:slf4j-api:$slf4jVersion"
