@@ -1,0 +1,42 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	concordionVersion = "1.4.4"
+	concordionExtensionsVersion = "1.1.1"
+	concordionStoryboardVersion = "[0.1.0,)"
+	
+	seleniumVersion				= "2.39.0"
+	slf4jVersion                = "1.7.7"
+}
+
+dependencies {
+	testCompile "org.concordion:concordion:$concordionVersion"
+	testCompile "org.concordion:concordion-extensions:$concordionExtensionsVersion"
+	testCompile "org.concordion:concordion-logback-extension:$concordionStoryboardVersion"
+	
+	testCompile "org.slf4j:slf4j-api:$slf4jVersion"
+	testCompile 'ch.qos.logback:logback-classic:1.1.2'
+	testCompile "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+}
+
+sourceSets {
+	main {
+		resources { srcDir 'src/test/java' }
+	}
+}
+
+test.dependsOn cleanTest
+test {
+	include '**/StoryboardDemo.*'
+	systemProperties['concordion.output.dir'] = "$reporting.baseDir/spec"
+	outputs.upToDateWhen { false } // force it to run even if test code hasn't changed
+}
+
