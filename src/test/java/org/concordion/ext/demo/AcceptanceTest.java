@@ -1,14 +1,9 @@
 package org.concordion.ext.demo;
 
 import org.concordion.api.FailFast;
-import org.concordion.api.extension.ConcordionExtension;
 import org.concordion.api.extension.Extension;
-import org.concordion.api.extension.Extensions;
 import org.concordion.ext.StoryboardExtension;
-import org.concordion.ext.TimestampFormatterExtension;
-import org.concordion.ext.TranslatorExtension;
 import org.concordion.ext.driver.web.Browser;
-import org.concordion.ext.driver.web.SeleniumExceptionMessageTranslator;
 import org.concordion.ext.driver.web.SeleniumScreenshotTaker;
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.After;
@@ -21,25 +16,21 @@ import org.slf4j.LoggerFactory;
  * A base class for Google search tests that opens up the Google site at the Google search page, and closes the browser once the test is complete.
  */
 @RunWith(ConcordionRunner.class)
-@Extensions({ TimestampFormatterExtension.class })
 @FailFast
-public abstract class AceptanceTest {
+public abstract class AcceptanceTest {
 
 	private Browser browser = null;
 	private final boolean logWebDriverEvents;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	@Extension
-	public ConcordionExtension seleniumMessageTranslator = new TranslatorExtension(new SeleniumExceptionMessageTranslator());
-
-	@Extension
 	public final StoryboardExtension storyboard = new StoryboardExtension().setScreenshotTaker(null);
 
-	public AceptanceTest() {
+	public AcceptanceTest() {
 		this(false);
 	}
 
-	public AceptanceTest(final boolean logWebDriverEvents) {
+	public AcceptanceTest(final boolean logWebDriverEvents) {
 		this.logWebDriverEvents = logWebDriverEvents;
 	}
 

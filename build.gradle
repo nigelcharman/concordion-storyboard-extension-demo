@@ -9,8 +9,7 @@ repositories {
 
 ext {
 	concordionVersion = "1.4.4"
-	concordionScreenshotExtensionVersion = "1.1.2"
-	concordionStoryboardVersion = "+"
+	concordionStoryboardVersion = "[0.2.0,)"
 	
 	seleniumVersion	= "+"
 	slf4jVersion                = "1.7.7"
@@ -18,7 +17,6 @@ ext {
 
 dependencies {
 	testCompile "org.concordion:concordion:$concordionVersion"
-	testCompile "org.concordion:concordion-screenshot-extension:$concordionScreenshotExtensionVersion"
 	testCompile "org.concordion:concordion-storyboard-extension:$concordionStoryboardVersion"
 	
 	testCompile "org.slf4j:slf4j-api:$slf4jVersion"
@@ -38,4 +36,3 @@ test {
 	systemProperties['concordion.output.dir'] = "$reporting.baseDir/spec"
 	outputs.upToDateWhen { false } // force it to run even if test code hasn't changed
 }
-
