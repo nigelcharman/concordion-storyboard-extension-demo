@@ -49,7 +49,7 @@ public class GoogleSearchPage {
         queryBox.sendKeys(Keys.ESCAPE);
         storyboard.addScreenshot(this.getClass().getSimpleName(), "Entered search text, and about to click search button");
 		submitButton.click();
-		return new GoogleResultsPage(driver, storyboard);
+		return new GoogleResultsPage(driver);
 	}
     
     public void clickOnNonExistentLink() {

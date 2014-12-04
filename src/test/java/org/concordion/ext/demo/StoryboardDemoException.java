@@ -18,7 +18,7 @@ import org.concordion.ext.driver.web.SeleniumScreenshotTaker;
  * life, the universe and everything.
  */
 @ExpectedToFail
-public class StoryboardDemoFailing extends AcceptanceTest {
+public class StoryboardDemoException extends AcceptanceTest {
 
 	private GoogleSearchPage searchPage;
 	private GoogleResultsPage resultsPage;
@@ -28,7 +28,7 @@ public class StoryboardDemoFailing extends AcceptanceTest {
 	 */
 	public void searchFor(final String topic) {
 		searchPage = new GoogleSearchPage(getBrowser().getDriver(), getStoryboard());
-		resultsPage = searchPage.searchFor(topic);
+		searchPage.clickOnNonExistentLink();
 	}
 
 	/**

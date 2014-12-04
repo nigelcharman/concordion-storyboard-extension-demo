@@ -34,15 +34,13 @@ public class GoogleResultsPage {
     private static Logger logger = LoggerFactory.getLogger(GoogleResultsPage.class.getName());
 
     private final WebDriver driver;
-    private final StoryboardExtension storyboard;
 
 	/**
 	 * Initialises the results page and waits for the page to fully load.
 	 * Assumes that the results page is already loading.
 	 */
-    public GoogleResultsPage(WebDriver driver, StoryboardExtension storyboard) {
+    public GoogleResultsPage(WebDriver driver) {
 		this.driver = driver;
-		this.storyboard = storyboard;
         PageFactory.initElements(driver, this);
         waitForFooter();
 	}

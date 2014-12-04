@@ -65,6 +65,7 @@ public abstract class AcceptanceTest {
 			return;
 		}
 
+		logger.info("Closing browser");
 		storyboard.addScreenshot("Closing Browser", "The test has requested that the browser should be closed");
 		storyboard.setScreenshotTaker(null);
 
