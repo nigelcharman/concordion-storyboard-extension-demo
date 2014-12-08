@@ -9,14 +9,14 @@ wrapper {
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 ext {
 	concordionVersion = "1.4.4"
-	concordionStoryboardVersion = "[0.2.0,)"
-	
-	seleniumVersion	= "+"
-	slf4jVersion                = "1.7.7"
+	concordionStoryboardVersion = "[0.2.0,)"	
+	seleniumVersion	= "2.44.0"
+	slf4jVersion    = "1.7.7"
 }
 
 dependencies {
