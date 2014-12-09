@@ -22,6 +22,7 @@ public class StoryboardDemoFailing extends AcceptanceTest {
 
 	private GoogleSearchPage searchPage;
 	private GoogleResultsPage resultsPage;
+	private String result;
 
 	/**
 	 * Searches for the specified topic, and waits for the results page to load.
@@ -34,7 +35,16 @@ public class StoryboardDemoFailing extends AcceptanceTest {
 	/**
 	 * Returns the result from Google calculation.
 	 */
-	public String getCalculatorResult() {
-		return resultsPage.getCalculatorResult();
+	public String getCalculatorResultBrowserOpen() {
+		result = resultsPage.getCalculatorResult();
+		return result;
+	}
+	
+	/**
+	 * Returns the result from Google calculation.
+	 */
+	public String getCalculatorResultBrowserClosed() {
+		closeBrowser();
+		return result;
 	}
 }

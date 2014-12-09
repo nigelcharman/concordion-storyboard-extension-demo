@@ -11,7 +11,7 @@ public class Browser {
 	private WebDriver driver;
 
 	public Browser() {
-		//System.setProperty("webdriver.firefox.bin", "C:/Mozilla Firefox Portable/FirefoxPortable.exe");
+		System.setProperty("webdriver.firefox.bin", "C:/Mozilla Firefox Portable/FirefoxPortable.exe");
 		driver = new FirefoxDriver();
 	}
 
