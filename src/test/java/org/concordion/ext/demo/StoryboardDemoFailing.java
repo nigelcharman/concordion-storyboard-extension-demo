@@ -19,7 +19,6 @@ import org.concordion.ext.driver.web.SeleniumScreenshotTaker;
  */
 @ExpectedToFail
 public class StoryboardDemoFailing extends AcceptanceTest {
-
 	private GoogleSearchPage searchPage;
 	private GoogleResultsPage resultsPage;
 	private String result;
