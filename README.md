@@ -81,7 +81,7 @@ If your proxy requires authentication, you will also need to set the properties 
 
 Additional Gradle Files
 -----------------------
-`dev.gradle` is only needed if you want to run against snapshot or local builds of the concordion-screenshot-extension.
+`dev.gradle` is only needed if you want to run against snapshot or local builds of the concordion-storyboard-extension.
 
 `publish.gradle` is only needed if you want to publish the output to Github pages.
 
