@@ -13,9 +13,9 @@ repositories {
 }
 
 ext {
-	concordionVersion = "1.4.4"
-	concordionStoryboardVersion = "[0.2.0,)"	
-	seleniumVersion	= "2.44.0"
+	concordionVersion = "1.4.6"
+	concordionStoryboardVersion = "[0.3.0,)"	
+	seleniumVersion	= "[2.44.0,)"
 	slf4jVersion    = "1.7.7"
 }
 
