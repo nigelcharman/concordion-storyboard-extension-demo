@@ -2,11 +2,14 @@
 <link href="concordion.css" rel="stylesheet" type="text/css" />
 <body>
 
-<ul>
-	<li><a c:run="concordion" href="StoryboardDemoSuccess.html">Success</a></li>
-	<li><a c:run="concordion" href="StoryboardDemoFailing.html">Failing</a></li>
-	<li><a c:run="concordion" href="StoryboardDemoException.html">Exception</a></li>
-</ul>
+<h1>The Ultimate Question</h1>
+
+<p>What do you get if you <a href="http://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Answer_to_the_Ultimate_Question_of_Life.2C_the_Universe.2C_and_Everything_.2842.29">multiply six by nine</a>?</p> 
+
+<div class="example">
+<h4>Example</h4>
+<p>When I google "<span c:execute="searchFor(#TEXT)">6 * 9</span>" the answer should be "<span c:assertEquals="getCalculatorResult()">54</span>".</p>
+</div>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package org.concordion.ext.driver.page;
 
 import org.concordion.ext.StoryboardExtension;
+import org.concordion.ext.demo.AcceptanceTest;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,9 +31,9 @@ public class GoogleSearchPage {
 	/**
 	 * Opens the Google Search Page.
 	 */
-	public GoogleSearchPage(WebDriver webDriver, StoryboardExtension storyboard) {
-		this.driver = webDriver;
-		this.storyboard = storyboard;
+	public GoogleSearchPage(AcceptanceTest test) {
+		this.driver = test.getBrowser().getDriver();
+		this.storyboard = test.getStoryboard();
 		
         PageFactory.initElements(driver, this);
 		driver.get("http://www.google.com");
