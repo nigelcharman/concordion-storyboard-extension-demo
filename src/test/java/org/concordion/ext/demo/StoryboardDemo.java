@@ -3,9 +3,6 @@ package org.concordion.ext.demo;
 import org.concordion.ext.driver.page.GoogleResultsPage;
 import org.concordion.ext.driver.page.GoogleSearchPage;
 import org.concordion.ext.driver.web.SeleniumScreenshotTaker;
-import org.concordion.ext.storyboard.CardResult;
-import org.concordion.ext.storyboard.NotificationCard;
-import org.concordion.ext.storyboard.StockCardImage;
 
 /**
  * A fixture class for the ScreenshotDemo.html specification.

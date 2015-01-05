@@ -2,7 +2,6 @@ package org.concordion.ext.driver.page;
 
 import java.util.List;
 
-import org.concordion.ext.StoryboardExtension;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
