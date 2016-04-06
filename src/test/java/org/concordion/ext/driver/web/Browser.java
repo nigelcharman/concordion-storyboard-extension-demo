@@ -8,25 +8,34 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
  * Manages the browser session.
  */
 public class Browser {
-	private WebDriver driver;
-
-	public Browser() {
-		//System.setProperty("webdriver.firefox.bin", "C:/Mozilla Firefox Portable/FirefoxPortable.exe");
-		driver = new FirefoxDriver();
-	}
+	private WebDriver driver = null;
 
 	public void quit() {
 		driver.quit();
 	}
 
-	public void addLogger() {
-		EventFiringWebDriver efwd = new EventFiringWebDriver(driver);
-		efwd.register(new SeleniumEventLogger());
-		driver = efwd;
+	public boolean isOpen() {
+		return driver != null;
 	}
-
+	
+	public WebDriver open() {
+		if (driver == null) {
+			driver = new FirefoxDriver();
+			
+			EventFiringWebDriver efwd = new EventFiringWebDriver(driver);
+			efwd.register(new SeleniumEventLogger());
+			driver = efwd;	
+		}
+		
+		return driver;
+	}
+	
 	public WebDriver getDriver() {
 		return driver;
 	}
 
+	public void close() {
+		driver.quit();
+		driver = null;
+	}
 }

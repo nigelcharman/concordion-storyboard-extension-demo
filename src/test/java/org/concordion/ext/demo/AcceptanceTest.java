@@ -1,13 +1,13 @@
 package org.concordion.ext.demo;
 
+import org.concordion.api.AfterSpecification;
+import org.concordion.api.BeforeSpecification;
 import org.concordion.api.FailFast;
 import org.concordion.api.extension.Extension;
 import org.concordion.ext.StoryboardExtension;
 import org.concordion.ext.driver.web.Browser;
 import org.concordion.ext.driver.web.SeleniumScreenshotTaker;
 import org.concordion.integration.junit4.ConcordionRunner;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,20 +19,11 @@ import org.slf4j.LoggerFactory;
 @FailFast
 public abstract class AcceptanceTest {
 
-	private Browser browser = null;
-	private final boolean logWebDriverEvents;
+	private Browser browser = new Browser();
 	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	@Extension
-	public final StoryboardExtension storyboard = new StoryboardExtension().setScreenshotTaker(null);
-
-	public AcceptanceTest() {
-		this(false);
-	}
-
-	public AcceptanceTest(final boolean logWebDriverEvents) {
-		this.logWebDriverEvents = logWebDriverEvents;
-	}
+	private final StoryboardExtension storyboard = new StoryboardExtension();
 
 	public Logger getLogger() {
 		return logger;
@@ -43,17 +34,15 @@ public abstract class AcceptanceTest {
 	}
 
 	public boolean isBrowserOpen() {
-		return browser != null;
+		return browser.isOpen();
 	}
 
 	public Browser getBrowser() {
-		if (browser == null) {
-			browser = new Browser();
-
-			if (logWebDriverEvents) {
-				browser.addLogger();
-			}
-
+		if (!browser.isOpen()) {
+			browser.open();
+		}
+		
+		if (!storyboard.hasScreenshotTaker()) {
 			storyboard.setScreenshotTaker(new SeleniumScreenshotTaker(browser.getDriver()));
 		}
 
@@ -61,29 +50,18 @@ public abstract class AcceptanceTest {
 	}
 
 	public void closeBrowser() {
-		if (browser == null) {
-			return;
+		if (browser.isOpen()) {
+			browser.close();
+			storyboard.setScreenshotTaker(null);
 		}
-
-		logger.info("Closing browser");
-		storyboard.addScreenshot("Closing Browser", "The test has requested that the browser should be closed");
-		storyboard.setScreenshotTaker(null);
-
-		try {
-			browser.quit();
-		} catch (Exception ex) {
-			getLogger().warn("Exception attempting to quit the browser" + ex);
-		}
-
-		browser = null;
 	}
 
-	@Before
+	@BeforeSpecification
 	public void startUpTest() {
 		logger.info("Initialising the acceptance test class {} on thread {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
 	}
 
-	@After
+	@AfterSpecification
 	public void tearDownTest() {
 		closeBrowser();
 

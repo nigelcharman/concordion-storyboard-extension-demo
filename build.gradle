@@ -1,10 +1,10 @@
 apply plugin: 'java'
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 wrapper {
-    gradleVersion = "2.2"
+    gradleVersion = "2.12"
 }
 
 repositories {
@@ -12,20 +12,13 @@ repositories {
 	mavenLocal()
 }
 
-ext {
-	concordionVersion = "1.4.6"
-	concordionStoryboardVersion = "[0.3.1,)"	
-	seleniumVersion	= "[2.44.0,)"
-	slf4jVersion    = "1.7.7"
-}
-
 dependencies {
-	testCompile "org.concordion:concordion:$concordionVersion"
-	testCompile "org.concordion:concordion-storyboard-extension:$concordionStoryboardVersion"
+	testCompile 'org.concordion:concordion:2.0.0'
+	testCompile 'org.concordion:concordion-storyboard-extension:2.0.0'
 	
-	testCompile "org.slf4j:slf4j-api:$slf4jVersion"
-	testCompile 'ch.qos.logback:logback-classic:1.1.2'
-	testCompile "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+	testCompile 'org.slf4j:slf4j-api:1.7.21'
+	testCompile 'ch.qos.logback:logback-classic:1.1.7'
+	testCompile 'org.seleniumhq.selenium:selenium-java:2.53.0'
 }
 
 sourceSets {

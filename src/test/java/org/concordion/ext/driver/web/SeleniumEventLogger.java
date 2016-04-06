@@ -25,13 +25,13 @@ public class SeleniumEventLogger implements WebDriverEventListener {
             String newValue = arg0.getAttribute("value");
             if (!newValue.equals(oldValue)) {
                 if (newValue.length() == 0) {
-                    logger.info("[{}] - cleared value", elementName);
+                    logger.debug("[{}] - cleared value", elementName);
                 } else {
-                    logger.info("[{}] - changed value to '{}'", elementName, newValue);
+                    logger.debug("[{}] - changed value to '{}'", elementName, newValue);
                 }
             }
         } catch (Exception e) {
-            logger.info("[{}] - changed value", elementName);
+            logger.debug("[{}] - changed value", elementName);
         }
     }
 
@@ -46,27 +46,27 @@ public class SeleniumEventLogger implements WebDriverEventListener {
 
     @Override
     public void afterNavigateBack(WebDriver arg0) {
-        logger.info("Navigated back");
+        logger.debug("Navigated back");
     }
 
     @Override
     public void afterNavigateForward(WebDriver arg0) {
-        logger.info("Navigated forward");
+        logger.debug("Navigated forward");
     }
 
     @Override
     public void afterNavigateTo(String arg0, WebDriver arg1) {
-        logger.info("Navigated to '{}'", arg0);
+        logger.debug("Navigated to '{}'", arg0);
     }
 
     @Override
     public void afterScript(String arg0, WebDriver arg1) {
-        logger.info("Ran script '{}'", arg0);
+        logger.debug("Ran script '{}'", arg0);
     }
 
     @Override
     public void beforeClickOn(WebElement arg0, WebDriver arg1) {
-        logger.info("[{}] - clicked", getElementName(arg0));
+        logger.debug("[{}] - clicked", getElementName(arg0));
     }
 
     @Override
@@ -105,4 +105,14 @@ public class SeleniumEventLogger implements WebDriverEventListener {
         }
         return "unknown";
     }
+
+	@Override
+	public void beforeNavigateRefresh(WebDriver driver) {
+		
+	}
+
+	@Override
+	public void afterNavigateRefresh(WebDriver driver) {
+		
+	}
 }
