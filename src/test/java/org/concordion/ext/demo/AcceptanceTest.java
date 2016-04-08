@@ -9,6 +9,7 @@ import org.concordion.ext.driver.web.Browser;
 import org.concordion.ext.driver.web.SeleniumScreenshotTaker;
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +21,10 @@ import org.slf4j.LoggerFactory;
 public abstract class AcceptanceTest {
 
 	private Browser browser = new Browser();
-	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	@Extension
-	private final StoryboardExtension storyboard = new StoryboardExtension();
+	private StoryboardExtension storyboard = new StoryboardExtension();
 
 	public Logger getLogger() {
 		return logger;
@@ -37,7 +38,7 @@ public abstract class AcceptanceTest {
 		return browser.isOpen();
 	}
 
-	public Browser getBrowser() {
+	public WebDriver getBrowser() {
 		if (!browser.isOpen()) {
 			browser.open();
 		}
@@ -46,7 +47,7 @@ public abstract class AcceptanceTest {
 			storyboard.setScreenshotTaker(new SeleniumScreenshotTaker(browser.getDriver()));
 		}
 
-		return browser;
+		return browser.getDriver();
 	}
 
 	public void closeBrowser() {

@@ -32,7 +32,7 @@ public class GoogleSearchPage {
 	 * Opens the Google Search Page.
 	 */
 	public GoogleSearchPage(AcceptanceTest test) {
-		this.driver = test.getBrowser().getDriver();
+		this.driver = test.getBrowser();
 		this.storyboard = test.getStoryboard();
 		
         PageFactory.initElements(driver, this);
