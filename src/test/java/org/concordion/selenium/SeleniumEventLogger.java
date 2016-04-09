@@ -1,4 +1,4 @@
-package org.concordion.ext.driver.web;
+package org.concordion.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

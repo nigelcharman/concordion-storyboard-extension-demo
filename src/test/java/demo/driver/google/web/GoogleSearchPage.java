@@ -1,7 +1,9 @@
-package org.concordion.ext.driver.page;
+package demo.driver.google.web;
 
-import org.concordion.ext.StoryboardExtension;
-import org.concordion.ext.demo.AcceptanceTest;
+import org.concordion.selenium.Browser;
+import org.concordion.selenium.listener.BrowserListener;
+import org.concordion.selenium.listener.PageLoadedEvent;
+import org.concordion.selenium.listener.PageUpdatedEvent;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,20 +27,21 @@ public class GoogleSearchPage {
     @FindBy(className = "nonExistent")
     private WebElement nonExistentLink;
 
-    private final WebDriver driver;
-    private final StoryboardExtension storyboard;
+    private final BrowserListener listener;
+    private final Browser browser;
     
 	/**
 	 * Opens the Google Search Page.
 	 */
-	public GoogleSearchPage(AcceptanceTest test) {
-		this.driver = test.getBrowser();
-		this.storyboard = test.getStoryboard();
+	public GoogleSearchPage(Browser browser, BrowserListener listener) {
+        this.browser = browser;
+        this.listener = listener;
 		
+        WebDriver driver = browser.getDriver();
         PageFactory.initElements(driver, this);
 		driver.get("http://www.google.com");
 		
-		this.storyboard.addScreenshot(this.getClass().getSimpleName(), "Opened Google's web page");
+		listener.pageLoaded(new PageLoadedEvent(this.getClass().getSimpleName(), "Opened Google's web page"));
 	}
 
     /**
@@ -48,13 +51,9 @@ public class GoogleSearchPage {
 	public GoogleResultsPage searchFor(String query) {
         queryBox.sendKeys(query);
         queryBox.sendKeys(Keys.ESCAPE);
-        storyboard.addScreenshot(this.getClass().getSimpleName(), "Entered search text, and about to click search button");
+        String description = "Entered search text, and about to click search button";
+        listener.pageUpdated(new PageUpdatedEvent(this.getClass().getSimpleName(), description));
 		submitButton.click();
-		return new GoogleResultsPage(driver);
+		return new GoogleResultsPage(browser, listener);
 	}
-    
-    public void clickOnNonExistentLink() {
-    	storyboard.addScreenshot(this.getClass().getSimpleName(), "About to click non existant link");
-        nonExistentLink.click();
-    }
 }

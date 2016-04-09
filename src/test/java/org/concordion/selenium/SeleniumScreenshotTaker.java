@@ -1,4 +1,4 @@
-package org.concordion.ext.driver.web;
+package org.concordion.selenium;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -22,8 +22,8 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 public class SeleniumScreenshotTaker implements ScreenshotTaker {
 	private final WebDriver driver;
 
-	public SeleniumScreenshotTaker(WebDriver driver) {
-		WebDriver baseDriver = driver;
+	public SeleniumScreenshotTaker(Browser browser) {
+		WebDriver baseDriver = browser.getDriver();
 
 		while (baseDriver instanceof EventFiringWebDriver) {
 			baseDriver = ((EventFiringWebDriver)baseDriver).getWrappedDriver();

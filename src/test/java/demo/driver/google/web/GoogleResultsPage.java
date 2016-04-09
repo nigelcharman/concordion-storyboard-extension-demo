@@ -1,7 +1,9 @@
-package org.concordion.ext.driver.page;
+package demo.driver.google.web;
 
 import java.util.List;
 
+import org.concordion.selenium.Browser;
+import org.concordion.selenium.listener.BrowserListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,15 +34,17 @@ public class GoogleResultsPage {
 
     private static Logger logger = LoggerFactory.getLogger(GoogleResultsPage.class.getName());
 
-    private final WebDriver driver;
+    private Browser browser;
 
 	/**
 	 * Initialises the results page and waits for the page to fully load.
 	 * Assumes that the results page is already loading.
 	 */
-    public GoogleResultsPage(WebDriver driver) {
-		this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public GoogleResultsPage(Browser browser, BrowserListener listener) {
+        
+        this.browser = browser;
+        WebDriver driver = browser.getDriver();
+        PageFactory.initElements(driver , this);
         waitForFooter();
 	}
 
@@ -74,7 +78,7 @@ public class GoogleResultsPage {
     }
     
     private void waitForFooter() {
-		WebDriverWait wait = new  WebDriverWait(driver, 30);
+		WebDriverWait wait = new  WebDriverWait(browser.getDriver(), 30);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foot")));
 	}
 }
