@@ -78,18 +78,8 @@ public abstract class AcceptanceTest {
 		}
 	}
 	
-	@BeforeSpecification
-	public void beforeSpecification() {
-		logger.info("Initialising the acceptance test class {} on thread {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
-	}
-	
 	@AfterExample
 	public void after() {
 		storyboard.setScreenshotTaker(null);
-	}
-
-	@AfterSpecification
-	public void afterSpecification() {
-		logger.info("Tearing down the acceptance test class on thread {}", Thread.currentThread().getName());
 	}
 }
