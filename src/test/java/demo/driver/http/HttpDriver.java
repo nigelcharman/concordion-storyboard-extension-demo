@@ -22,7 +22,7 @@ public class HttpDriver {
                 response.append(line + "\n");
             }
         }
-        
+
         return response.toString();
     }
 }

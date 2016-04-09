@@ -19,28 +19,28 @@ import demo.driver.http.HttpDriver;
  */
 public class StoryboardDemoNoExampleFixture extends FixtureBase {
 
-	private GoogleSearchPage searchPage;
-	private GoogleResultsPage resultsPage;
+    private GoogleSearchPage searchPage;
+    private GoogleResultsPage resultsPage;
 
-	/**
-	 * Searches for the specified topic, and waits for the results page to load.
-	 */
-	public void searchFor(final String topic) {
+    /**
+     * Searches for the specified topic, and waits for the results page to load.
+     */
+    public void searchFor(final String topic) {
         searchPage = new GoogleSearchPage(getBrowser(), getBrowserListener());
-		resultsPage = searchPage.searchFor(topic);
-	}
+        resultsPage = searchPage.searchFor(topic);
+    }
 
-	/**
-	 * Returns the result from Google calculation.
-	 */
-	public String getCalculatorResult() {
-		return resultsPage.getCalculatorResult();
-	}
-	
+    /**
+     * Returns the result from Google calculation.
+     */
+    public String getCalculatorResult() {
+        return resultsPage.getCalculatorResult();
+    }
+
     public boolean makeRestCall(String url) throws IOException {
         String responseMessage = new HttpDriver().get(url);
         getServiceListener().successResponse(new SuccessResponseEvent(responseMessage));
-        
+
         return !responseMessage.isEmpty();
     }
 }

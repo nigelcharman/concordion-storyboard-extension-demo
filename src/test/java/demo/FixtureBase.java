@@ -29,8 +29,8 @@ public abstract class FixtureBase {
 
     @Extension
     private StoryboardExtension storyboard = new StoryboardExtension();
-    
-	@ConcordionScoped(Scope.SPECIFICATION)
+
+    @ConcordionScoped(Scope.SPECIFICATION)
     private ScopedObjectHolder<Browser> browserHolder = new ScopedObjectHolder<Browser>() {
         @Override
         public Browser create() {
@@ -41,7 +41,7 @@ public abstract class FixtureBase {
 
         @Override
         protected void destroy(Browser browser) {
-            storyboard.removeScreenshotTaker();       
+            storyboard.removeScreenshotTaker();
             browser.close();
         };
     };
@@ -51,14 +51,14 @@ public abstract class FixtureBase {
     }
 
     protected BrowserListener getBrowserListener() {
-		return new StorycardCreatingBrowserListener(storyboard);
-	}
+        return new StorycardCreatingBrowserListener(storyboard);
+    }
 
-	@AfterExample
-	protected void after() {
-		storyboard.removeScreenshotTaker();
-	}
-	
+    @AfterExample
+    protected void after() {
+        storyboard.removeScreenshotTaker();
+    }
+
     protected ServiceListener getServiceListener() {
         return new StorycardCreatingServiceListener(storyboard);
     }

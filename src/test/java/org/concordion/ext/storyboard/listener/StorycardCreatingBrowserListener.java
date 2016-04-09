@@ -12,7 +12,7 @@ public class StorycardCreatingBrowserListener implements BrowserListener {
     public StorycardCreatingBrowserListener(StoryboardExtension storyboard) {
         this.storyboard = storyboard;
     }
-    
+
     @Override
     public void pageLoaded(PageLoadedEvent pageLoadedEvent) {
         storyboard.addScreenshot(pageLoadedEvent.getPageName(), pageLoadedEvent.getDescription());

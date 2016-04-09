@@ -16,6 +16,7 @@ public class StorycardCreatingServiceListener implements ServiceListener {
 
     @Override
     public void successResponse(SuccessResponseEvent parameterObject) {
-        storyboard.addNotification("Response", "Click image to see response", parameterObject.getResponseMessage(), "json", StockCardImage.JSON, CardResult.SUCCESS);
+        storyboard.addNotification("Response", "Click image to see response", parameterObject.getResponseMessage(),
+                "json", StockCardImage.JSON, CardResult.SUCCESS);
     }
 }
