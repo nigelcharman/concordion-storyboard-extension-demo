@@ -2,6 +2,7 @@ package org.concordion.ext.demo;
 
 import org.concordion.api.AfterExample;
 import org.concordion.api.AfterSpecification;
+import org.concordion.api.AfterSuite;
 import org.concordion.api.BeforeExample;
 import org.concordion.api.BeforeSpecification;
 import org.concordion.api.ConcordionScoped;
@@ -25,15 +26,22 @@ import org.slf4j.LoggerFactory;
 @FailFast
 public abstract class AcceptanceTest {
 
-//	@ConcordionScoped(Scope.SPECIFICATION)
-//	private ScopedObjectHolder<Browser> browser = new ScopedObjectHolder<Browser>() {
-//		@Override
-//		public Browser create() {
-//			return new Browser();
-//		}
-//	};
+	@ConcordionScoped(Scope.SPECIFICATION)
+    private ScopedObjectHolder<Browser> browserHolder = new ScopedObjectHolder<Browser>() {
+        @Override
+        public Browser create() {
+            Browser browser = new Browser();
+            return browser;
+        }
+
+        @Override
+        protected void destroy(Browser browser) {
+            storyboard.setScreenshotTaker(null);       
+            browserHolder.get().close();
+        };
+    };
+    
 	
-	private Browser browser = new Browser();
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	@Extension
@@ -48,51 +56,40 @@ public abstract class AcceptanceTest {
 	}
 
 	public boolean isBrowserOpen() {
-		return browser.isOpen();
+		return browserHolder.get().isOpen();
 	}
 
 	public WebDriver getBrowser() {
-		if (!browser.isOpen()) {
-			browser.open();
+		if (!browserHolder.get().isOpen()) {
+			browserHolder.get().open();
 		}
 		
 		if (!storyboard.hasScreenshotTaker()) {
-			logger.info("SET STORYBOARD SCREENSHOT TAKER");
-			storyboard.setScreenshotTaker(new SeleniumScreenshotTaker(browser.getDriver()), Scope.EXAMPLE);
+			storyboard.setScreenshotTaker(new SeleniumScreenshotTaker(browserHolder.get().getDriver()));
 		}
 
-		return browser.getDriver();
+		return browserHolder.get().getDriver();
 	}
 
 	public void closeBrowser() {
-		if (browser.isOpen()) {
-			logger.info("CLOSE BROWSER");
-			browser.close();
-			storyboard.removeScreenshotTaker();
+		if (browserHolder.get().isOpen()) {
+			browserHolder.get().close();
+			storyboard.setScreenshotTaker(null);
 		}
 	}
-
-	@BeforeExample
-	public void before() {
-		logger.info("BEFORE EXAMPLE: BROWSER OPEN = {}", browser.isOpen());
+	
+	@BeforeSpecification
+	public void beforeSpecification() {
+		logger.info("Initialising the acceptance test class {} on thread {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
 	}
 	
 	@AfterExample
 	public void after() {
-		logger.info("AFTER EXAMPLE: BROWSER OPEN = {}", browser.isOpen());
-	}
-	@BeforeSpecification
-	public void startUpTest() {
-		logger.info("Initialising the acceptance test class {} on thread {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
+		storyboard.setScreenshotTaker(null);
 	}
 
 	@AfterSpecification
-	public void tearDownTest() {
-		logger.info("AFTER SPECIFICATION: BROWSER OPEN = {}", browser.isOpen());
-		closeBrowser();
-
+	public void afterSpecification() {
 		logger.info("Tearing down the acceptance test class on thread {}", Thread.currentThread().getName());
 	}
-	
-	
 }

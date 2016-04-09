@@ -35,19 +35,9 @@ public class Browser {
 	}
 
 	public void close() {
-		driver.quit();
-		driver = null;
-	}
-	
-	
-	@Override
-	protected void finalize() throws Throwable {
-		System.out.println("FINALISE: " + isOpen());
-		
-		if (isOpen()){
-			close();
+		if (driver != null) {
+			driver.quit();
+			driver = null;
 		}
-		
-		super.finalize();
 	}
 }
