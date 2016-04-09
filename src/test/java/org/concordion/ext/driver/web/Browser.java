@@ -21,10 +21,10 @@ public class Browser {
 	public WebDriver open() {
 		if (driver == null) {
 			driver = new FirefoxDriver();
-			
-			EventFiringWebDriver efwd = new EventFiringWebDriver(driver);
-			efwd.register(new SeleniumEventLogger());
-			driver = efwd;	
+//			
+//			EventFiringWebDriver efwd = new EventFiringWebDriver(driver);
+//			efwd.register(new SeleniumEventLogger());
+//			driver = efwd;	
 		}
 		
 		return driver;

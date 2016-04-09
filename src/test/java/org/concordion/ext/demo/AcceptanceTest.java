@@ -1,8 +1,13 @@
 package org.concordion.ext.demo;
 
+import org.concordion.api.AfterExample;
 import org.concordion.api.AfterSpecification;
+import org.concordion.api.BeforeExample;
 import org.concordion.api.BeforeSpecification;
+import org.concordion.api.ConcordionScoped;
 import org.concordion.api.FailFast;
+import org.concordion.api.Scope;
+import org.concordion.api.ScopedObjectHolder;
 import org.concordion.api.extension.Extension;
 import org.concordion.ext.StoryboardExtension;
 import org.concordion.ext.driver.web.Browser;
@@ -20,6 +25,14 @@ import org.slf4j.LoggerFactory;
 @FailFast
 public abstract class AcceptanceTest {
 
+//	@ConcordionScoped(Scope.SPECIFICATION)
+//	private ScopedObjectHolder<Browser> browser = new ScopedObjectHolder<Browser>() {
+//		@Override
+//		public Browser create() {
+//			return new Browser();
+//		}
+//	};
+	
 	private Browser browser = new Browser();
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
@@ -44,7 +57,8 @@ public abstract class AcceptanceTest {
 		}
 		
 		if (!storyboard.hasScreenshotTaker()) {
-			storyboard.setScreenshotTaker(new SeleniumScreenshotTaker(browser.getDriver()));
+			logger.info("SET STORYBOARD SCREENSHOT TAKER");
+			storyboard.setScreenshotTaker(new SeleniumScreenshotTaker(browser.getDriver()), Scope.EXAMPLE);
 		}
 
 		return browser.getDriver();
@@ -52,11 +66,21 @@ public abstract class AcceptanceTest {
 
 	public void closeBrowser() {
 		if (browser.isOpen()) {
+			logger.info("CLOSE BROWSER");
 			browser.close();
-			storyboard.setScreenshotTaker(null);
+			storyboard.removeScreenshotTaker();
 		}
 	}
 
+	@BeforeExample
+	public void before() {
+		logger.info("BEFORE EXAMPLE: BROWSER OPEN = {}", browser.isOpen());
+	}
+	
+	@AfterExample
+	public void after() {
+		logger.info("AFTER EXAMPLE: BROWSER OPEN = {}", browser.isOpen());
+	}
 	@BeforeSpecification
 	public void startUpTest() {
 		logger.info("Initialising the acceptance test class {} on thread {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
@@ -64,6 +88,7 @@ public abstract class AcceptanceTest {
 
 	@AfterSpecification
 	public void tearDownTest() {
+		logger.info("AFTER SPECIFICATION: BROWSER OPEN = {}", browser.isOpen());
 		closeBrowser();
 
 		logger.info("Tearing down the acceptance test class on thread {}", Thread.currentThread().getName());
