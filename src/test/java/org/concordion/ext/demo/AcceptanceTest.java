@@ -93,4 +93,6 @@ public abstract class AcceptanceTest {
 
 		logger.info("Tearing down the acceptance test class on thread {}", Thread.currentThread().getName());
 	}
+	
+	
 }

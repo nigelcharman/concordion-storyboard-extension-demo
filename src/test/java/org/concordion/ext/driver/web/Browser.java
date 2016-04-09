@@ -38,4 +38,14 @@ public class Browser {
 		driver.quit();
 		driver = null;
 	}
+	
+	
+	@Override
+	protected void finalize() throws Throwable {
+		if (isOpen()){
+			close();
+		}
+		
+		super.finalize();
+	}
 }
