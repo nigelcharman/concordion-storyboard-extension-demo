@@ -42,6 +42,8 @@ public class Browser {
 	
 	@Override
 	protected void finalize() throws Throwable {
+		System.out.println("FINALISE: " + isOpen());
+		
 		if (isOpen()){
 			close();
 		}
