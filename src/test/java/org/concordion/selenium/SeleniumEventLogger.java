@@ -1,4 +1,4 @@
-package org.concordion.ext.driver.web;
+package org.concordion.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -106,13 +106,13 @@ public class SeleniumEventLogger implements WebDriverEventListener {
         return "unknown";
     }
 
-	@Override
-	public void beforeNavigateRefresh(WebDriver driver) {
-		
-	}
+    @Override
+    public void beforeNavigateRefresh(WebDriver driver) {
 
-	@Override
-	public void afterNavigateRefresh(WebDriver driver) {
-		
-	}
+    }
+
+    @Override
+    public void afterNavigateRefresh(WebDriver driver) {
+
+    }
 }
