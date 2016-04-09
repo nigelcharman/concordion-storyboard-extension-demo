@@ -35,7 +35,6 @@ public abstract class FixtureBase {
         @Override
         public Browser create() {
             Browser browser = new Browser();
-            storyboard.setScreenshotTaker(new SeleniumScreenshotTaker(browser));
             return browser;
         }
 
@@ -47,16 +46,24 @@ public abstract class FixtureBase {
     };
 
     protected Browser getBrowser() {
-        return browserHolder.get();
+        Browser browser = browserHolder.get();
+        
+        if (!storyboard.hasScreenshotTaker()) {
+        	storyboard.setScreenshotTaker(new SeleniumScreenshotTaker(browser));
+        }
+        
+        return browser;
+    }
+    
+    @AfterExample
+    private final void afterExample() {
+    	// Remove screenshot taker so that next example will not get the example 
+    	// completed screenshot unless it has used the browser 
+    	storyboard.removeScreenshotTaker();
     }
 
     protected BrowserListener getBrowserListener() {
         return new StorycardCreatingBrowserListener(storyboard);
-    }
-
-    @AfterExample
-    protected void after() {
-        storyboard.removeScreenshotTaker();
     }
 
     protected ServiceListener getServiceListener() {
