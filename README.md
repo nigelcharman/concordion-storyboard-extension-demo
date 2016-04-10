@@ -56,10 +56,10 @@ Successes: 0, Failures: 0, Ignored: 2, Exceptions: 1
 This test deliberately fails in order to demonstrate the extension.  It uses Concordion's `@ExpectedToFail` annotation to keep the JUnit passing (you'd normally only use this when you have a partially implemented feature).
 
 ### Concordion output
-The output folder should contain the following specification. (You can see an example of it [here](http://concordion.github.io/concordion-storyboard-extension-demo/spec/org/concordion/ext/demo/StoryboardDemo.html).
+The output folder should contain the following specification. (You can see an example of it [here](http://concordion.github.io/concordion-storyboard-extension-demo/spec/demo/StoryboardDemo.html)).
     
 #### StoryboardDemo.html
-3 links to a numnber of specifications that demonstrate different aspects of the storyboard
+3 links to a number of specifications that demonstrate different aspects of the storyboard.
 
 Potential Issues
 ------------------------
