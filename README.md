@@ -3,7 +3,7 @@
 
 This project demonstrates the usage of the [Concordion](http://concordion.org) [Storyboard Extension](http://github.com/concordion/concordion-storyboard-extension) with [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
-Example output is shown [here](http://concordion.github.io/concordion-storyboard-extension-demo/spec/org/concordion/ext/demo/StoryboardDemo.html).
+Example output is shown [here](http://concordion.github.io/concordion-storyboard-extension-demo/spec/demo/StoryboardDemo.html).
 
 # Running the tests
 ---------------------------
@@ -23,7 +23,7 @@ From the command line, `cd` to the folder containing a copy of this project, and
 
 This will download the required dependencies, clean the existing project, recompile all source code and run all the tests. 
 
-View the Concordion output in `build/reports/spec/org/concordion/ext/demo/StoryboardDemo.html`.
+View the Concordion output in `build/reports/spec/demo/StoryboardDemo.html`.
 
 
 IDE
@@ -32,7 +32,7 @@ For Eclipse and NetBeans, you will need to install a Gradle plugin to your IDE b
 
 On importing the project to your IDE, the required dependencies will be downloaded.
 
-Under the `src/test/java` folder, find the `StoryboardDemo` class in the `org.concordion.ext.demo` package and run as a JUnit test. The location of the Concordion output is shown on the standard output console.
+Under the `src/test/java` folder, find the `StoryboardDemoFixture` class in the `demo` package and run as a JUnit test. The location of the Concordion output is shown on the standard output console.
 
 What you should see
 -------------------
