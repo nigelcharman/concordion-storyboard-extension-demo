@@ -55,6 +55,10 @@ public abstract class FixtureBase {
         return browser;
     }
     
+    protected StoryboardExtension getStoryboard() {
+    	return storyboard;
+    }
+    
     @AfterExample
     private final void afterExample() {
     	// Remove screenshot taker so that next example will not get the example 

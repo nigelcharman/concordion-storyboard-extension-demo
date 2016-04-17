@@ -7,3 +7,15 @@ When I google "[6 * 9](- "searchFor(#TEXT)")" the answer should be "[54](- "c:as
 
 ## [Example REST](-)
 When I call this rest api [http://jsonplaceholder.typicode.com/posts/1](- "#url") it [returns some data](- "c:assertTrue=makeRestCall(#url)")
+
+## [Table Example](-)
+When I google the following, I expect to see the appropriate answer.
+
+| [search][][Search For][] | [The Answer][] |
+| ------------------------ | -------------: |
+| 6 * 9                    | 54             |
+| 6 * 7                    | 42             |
+
+[Search For]: - "#searchFor"
+[search]: - "#result = searchForTopic(#searchFor)"
+[The Answer]: - "?=#result"
