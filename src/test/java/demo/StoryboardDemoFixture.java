@@ -45,16 +45,8 @@ public class StoryboardDemoFixture extends FixtureBase {
     }
     
     public String searchForTopic(String topic) {
-    	getStoryboard()
-    		.addSectionContainer(topic)
-    		.setSkipFinalScreenshotForCurrentExample();
+    	getStoryboard().addSectionContainer(topic);
     	
-    	String result = new GoogleSearchPage(getBrowser(), getBrowserListener()).searchFor(topic).getCalculatorResult();
-    	
-    	getStoryboard()
-    		.addScreenshot("Example Completed", "")
-    		.closeContainer();
-    	
-    	return result;
+    	return new GoogleSearchPage(getBrowser(), getBrowserListener()).searchFor(topic).getCalculatorResult();
     }
 }
