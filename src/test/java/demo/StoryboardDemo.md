@@ -13,7 +13,7 @@ When I google the following, I expect to see the appropriate answer.
 
 | [search][][Search For][] | [The Answer][] |
 | ------------------------ | -------------: |
-| 6 * 9                    | 55             |
+| 6 * 9                    | 54             |
 | 6 * 7                    | 42             |
 
 [Search For]: - "#searchFor"
